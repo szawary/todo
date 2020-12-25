@@ -10,11 +10,43 @@
 </head>
 
 <body>
+    <div class="container">
+        <!-- Header. Name of this day. -->
+        <H3 class='body__day'></H3>
 
+        <!-- date -->
+        <h3 class='body__date'></h3>
 
+        <!-- input area -->
+        <div class="body__todo-insert">
+            <input type="text">
+            <button>
+                <i class="fa fa-plus"></i> </button>
+        </div>
 
+        <!-- display todos -->
+        <p>You have
+            <span class='todo__number'>0</span>
+            pending items.
+        </p>
 
+        <!-- todo list -->
+        <div class="todo__list--pending">
+        </div>
 
+        <div class="todo__list--done">
+        </div>
+
+        <!-- footer menu -->
+        <div class="div__footer">
+            <button class='footer__btn--complete'>
+                Show Complete
+            </button>
+            <button class='footer__btn--clear'>
+                Clear All
+            </button>
+        </div>
+    </div>
 
     <footer>
         <script src="./assets/js/main.js"></script>
