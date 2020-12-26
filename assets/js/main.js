@@ -1,27 +1,14 @@
 'use strict';
-// test datas
-let todos = [];
 
-//Parsts of date
+let todos = [];
 const bodyDay = document.querySelector('.body__day');
 const bodyDate = document.querySelector('.body__date');
+const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',];
 const todoAddBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 const todoListPending = document.querySelector('.todo__list--pending');
+const todoListDone = document.querySelector('.todo__list--done');
 const todoNumber = document.querySelector('.todo__number');
-
-
-const dayNames = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-];
-
-
 
 (function () {
     // Initialize application
@@ -29,7 +16,19 @@ const dayNames = [
         showDate();
         setListeners();
         loadExistingTodos();
+    };
 
+    // show date
+    const showDate = () => {
+        const currentDate = new Date();
+        const day = [
+            currentDate.getMonth() + 1,
+            currentDate.getDate(),
+            currentDate.getFullYear(),
+        ].map(num => num < 10 ? `0${num}` : num);
+
+        bodyDay.textContent = dayNames[currentDate.getDay()];
+        bodyDate.textContent = day.join('-');
     };
 
     // localstorage handler object
@@ -65,19 +64,6 @@ const dayNames = [
         };
 
         todosNumbers();
-    };
-
-    // show date
-    const showDate = () => {
-        const currentDate = new Date();
-        const day = [
-            currentDate.getMonth() + 1,
-            currentDate.getDate(),
-            currentDate.getFullYear(),
-        ].map(num => num < 10 ? `0${num}` : num);
-
-        bodyDay.textContent = dayNames[currentDate.getDay()];
-        bodyDate.textContent = day.join('-');
     };
 
     // set event listeners
