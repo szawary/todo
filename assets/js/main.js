@@ -45,11 +45,6 @@ const dayNames = [
 
     // Initialize application
     const init = () => {
-        const savedTodos = localDb.getItem('todos');
-        if (savedTodos) {
-            todos = savedTodos;
-        }
-
         showDate();
         setListeners();
         loadExistingTodos();
@@ -57,6 +52,11 @@ const dayNames = [
 
     //load existing todos
     const loadExistingTodos = () => {
+        const savedTodos = localDb.getItem('todos');
+        if (savedTodos) {
+            todos = savedTodos;
+        };
+
         if (todos && Array.isArray(todos)) {
             todos.forEach(todo => showToDo(todo));
         };
