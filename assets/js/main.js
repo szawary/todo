@@ -1,14 +1,13 @@
 'use strict';
 // test datas
-let todos = [
-    { title: 'Lunch', content: 'Lunch with my friends' },
-    { title: 'Lunch', content: 'Lunch with my friends' },
-    { title: 'Lunch', content: 'Lunch with my friends' },
-];
+let todos = [];
 
 //Parsts of date
 const bodyDay = document.querySelector('.body__day');
 const bodyDate = document.querySelector('.body__date');
+const todoAddBtn = document.querySelector('.todo__btn');
+const todoInput = document.querySelector('.todo__input');
+const todoListPending = document.querySelector('.todo__list--pending');
 
 const dayNames = [
     'Sunday',
@@ -19,6 +18,8 @@ const dayNames = [
     'Friday',
     'Saturday',
 ];
+
+
 
 (function () {
     // localstorage handler object
@@ -50,21 +51,67 @@ const dayNames = [
         }
 
         showDate();
+        setListeners();
+        loadExistingTodos();
+    };
+
+    //load existing todos
+    const loadExistingTodos = () => {
+        if (todos && Array.isArray(todos)) {
+            todos.forEach(todo => showToDo(todo));
+        };
     };
 
     // show date
     const showDate = () => {
         const currentDate = new Date();
         const day = [
-            currentDate.getFullYear(),
             currentDate.getMonth() + 1,
             currentDate.getDate(),
+            currentDate.getFullYear(),
         ].map(num => num < 10 ? `0${num}` : num);
 
         bodyDay.textContent = dayNames[currentDate.getDay()];
         bodyDate.textContent = day.join('-');
     };
 
+    // set event listeners
+    const setListeners = () => {
+        todoAddBtn.addEventListener('click', addNewTodo);
+    };
+
+    // save and add todo to the datebase
+    const addNewTodo = () => {
+        if (todoInput.value === "") {
+            alert('Please type a todo.');
+            return;
+        };
+
+        const todo = {
+            content: todoInput.value,
+            ready: false,
+        };
+        todos.push(todo);
+        localDb.setItem('todos', todos);
+        showToDo(todo);
+        todoInput.value = '';
+
+
+    };
+
+    // show todo in the list
+    const showToDo = todo => {
+        const todoItem = document.createElement('div');
+        todoListPending.appendChild(todoItem);
+        todoItem.innerHTML = `
+            <input type="checkbox">
+            <span>${todo.content}</span>
+            <button>
+            <i class="fa fa-trash"></i>
+            </button>
+        
+        `;
+    };
 
     init();
 })();
