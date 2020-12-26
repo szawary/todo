@@ -63,8 +63,8 @@ const dayNames = [
         if (todos && Array.isArray(todos)) {
             todos.forEach(todo => showToDo(todo));
         };
-        todosNumbers();
 
+        todosNumbers();
     };
 
     // show date
@@ -102,7 +102,6 @@ const dayNames = [
         todoInput.value = '';
 
         todosNumbers();
-
     };
 
     // show todo in the list
