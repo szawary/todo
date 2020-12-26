@@ -8,6 +8,8 @@ const bodyDate = document.querySelector('.body__date');
 const todoAddBtn = document.querySelector('.todo__btn');
 const todoInput = document.querySelector('.todo__input');
 const todoListPending = document.querySelector('.todo__list--pending');
+const todoNumber = document.querySelector('.todo__number');
+
 
 const dayNames = [
     'Sunday',
@@ -22,6 +24,14 @@ const dayNames = [
 
 
 (function () {
+    // Initialize application
+    const init = () => {
+        showDate();
+        setListeners();
+        loadExistingTodos();
+
+    };
+
     // localstorage handler object
     const localDb = {
         // localDb.setItem('todos', todos);
@@ -43,13 +53,6 @@ const dayNames = [
         },
     };
 
-    // Initialize application
-    const init = () => {
-        showDate();
-        setListeners();
-        loadExistingTodos();
-    };
-
     //load existing todos
     const loadExistingTodos = () => {
         const savedTodos = localDb.getItem('todos');
@@ -60,6 +63,8 @@ const dayNames = [
         if (todos && Array.isArray(todos)) {
             todos.forEach(todo => showToDo(todo));
         };
+        todosNumbers();
+
     };
 
     // show date
@@ -96,6 +101,7 @@ const dayNames = [
         showToDo(todo);
         todoInput.value = '';
 
+        todosNumbers();
 
     };
 
@@ -112,6 +118,16 @@ const dayNames = [
         
         `;
     };
+
+    // show pending todos
+    const todosNumbers = () => {
+        let todosLength = todos.length;
+        todoNumber.innerHTML = todosLength;
+    }
+
+
+
+
 
     init();
 })();
