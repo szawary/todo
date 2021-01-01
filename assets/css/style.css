@@ -1,0 +1,23 @@
+.todo__list--done{
+    display: none;
+}
+
+.show-done .todo__list--done{
+    display: block;
+}
+
+.footer__btn--complete .hide {
+    display: none;
+}
+
+.show-done .footer__btn--complete .hide {
+    display: inline;
+}
+
+.show-done .footer__btn--complete .show {
+    display: none;
+}
+
+.todo__footer{
+    margin-top: 2rem;
+}
